@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-const modalRoot = document.getElementById("modal");
+
 
 const Modal = ({ children }) => {
   const elRef = useRef(null);
@@ -10,6 +10,9 @@ const Modal = ({ children }) => {
   }
 
   useEffect(() => {
+    // You can not reference document in node.js all the documents
+    // references should be inside hooks 
+    const modalRoot = document.getElementById("modal");
     modalRoot.appendChild(elRef.current);
     return () => modalRoot.removeChild(elRef.current);
   }, []);
